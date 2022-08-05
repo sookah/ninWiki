@@ -1,6 +1,6 @@
 # NinWiki
 
-Where the Dev Nijas are at.
+Where the Dev Ninjas are at.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
 
