@@ -60,9 +60,9 @@ typically this command has to be run in the docker container.
 # check your container image id with
 docker ps
 
-CONTAINER ID   IMAGE      COMMAND                  CREATED      STATUS          PORTS                    NAMES
-07a1244036d3   blog_api   "docker-entrypoint.s…"   4 days ago   Up 43 seconds   0.0.0.0:3000->3000/tcp   api
-6d5d316a6d17   postgres   "docker-entrypoint.s…"   4 days ago   Up 18 minutes   0.0.0.0:5432->5432/tcp   api_db
+# CONTAINER ID   IMAGE      COMMAND                  CREATED      STATUS          PORTS                    NAMES
+# 07a1244036d3   blog_api   "docker-entrypoint.s…"   4 days ago   Up 43 seconds   0.0.0.0:3000->3000/tcp   api
+# 6d5d316a6d17   postgres   "docker-entrypoint.s…"   4 days ago   Up 18 minutes   0.0.0.0:5432->5432/tcp   api_db
 ```
 
 Grab the api Image container id (07a1244036d3) and execute command below to get into the shell
@@ -72,7 +72,7 @@ docker exec -it <mycontainer> bash
 ```
 
 ```bash
-# in the /api folder
+# in the /api folder run the following prisma commands to seed the data
 npx prisma db push
 
 npx prisma db seed
@@ -82,8 +82,29 @@ visit localhost:3000/villages to see the seeded villages data.
 
 
 
+### Work around from project cli
 
+If the docker method is too difficult, we can simply do it from the local copy itself
 
+```
+# go to api folder
+cd api
 
+# install packages if you have not yet
+npm i
+```
 
+in the `.env` file here, set the database url to use the localhost (since our postgres is running in the localhost docker container)
 
+`DATABASE_URL="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${LOCAL_DB_HOST}:5432/${POSTGRES_DB}?schema=public?connect_timeout=300"`
+
+from your cli run
+
+```bash
+npx prisma db push
+
+npx prisma db seed
+```
+
+Once done change the URL back to 
+`DATABASE_URL="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${CONTAINER_NAME}:5432/${POSTGRES_DB}?schema=public?connect_timeout=300"`
