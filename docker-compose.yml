@@ -1,0 +1,48 @@
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: api
+      # Only will build development stage from our dockerfile
+      target: development
+    volumes:
+      # map the $HOST api directory (your pc) to the container api directory (the docker container) 
+      - $PWD/api:/usr/src/api
+      # let docker handle volume for node_modules in the container
+      - /usr/src/api/node_modules
+    container_name: api
+
+    env_file:
+      - .env
+
+    # Run a command against the development stage of the image
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    container_name: api_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-postgres:/var/lib/postgresql/data
+
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+volumes:
+  db-postgres:

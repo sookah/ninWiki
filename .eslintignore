@@ -1,0 +1,17 @@
+dist/
+coverage/
+node_modules/
+.next/
+.terraform/
+*.tfstate
+*.tfstate.backup
+.pnp.js
+.pnp.cjs
+*.json
+.pnp.loader.mjs
+.yarnrc.yml
+.yarn/
+package.json
+package-lock.json
+e2e/**
+commitlint.config.js

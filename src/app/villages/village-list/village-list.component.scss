@@ -1,0 +1,19 @@
+.mat-card {
+  box-shadow: 5px 5px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+.village-card {
+  width: 420px;
+}
+
+.wrapper {
+  display: grid;
+  height: 300px;
+  place-items: center;
+}
+
+.status-chip {
+  font-size: 12px;
+  margin-top: 6px;
+}

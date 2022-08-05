@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:host ::ng-deep .mat-chip-list-wrapper mat-chip {
+    padding: 0 8px;
+  }
+  
+
+.nin-wiki-logo {
+    height: 300px;
+}
+
+// background: #0eb0ff;
+// }
+// .mat-card:not([class*="mat-elevation-z"]) {
+//   box-shadow: 10px 10px 2px -2px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+// }
+
+.breadcrumb {
+  font-size: 2rem !important;
+  font-weight: lighter !important;
+}

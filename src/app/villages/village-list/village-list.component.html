@@ -1,0 +1,37 @@
+<div class=" mx-auto font-serif justify-content-center text-center ">
+    <h2 class="display-2 dark:text-gray-700 breadcrumb">
+        /villages
+    </h2>
+</div>
+
+<div class="grid gap-2 grid-cols-4 justify-items-center mt-10">
+    <div class="empty"></div>
+    <mat-card *ngFor="let village of villages; index as i"
+        class="village-card flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        [style.background]="i<1?'rgb(157, 236, 173)':'rgb(248, 203, 46)'">
+        <mat-card-header>
+            <div mat-card-avatar mat-card-sm-image class="example-header-image">
+                <img src="{{village.imageUrl}}" alt="">
+            </div>
+            <mat-card-title>{{village.title}}</mat-card-title>
+            <mat-card-subtitle>
+                {{village.description}}
+                <div *ngIf="village?.isAlly;then aliveNin else deadNin"></div>
+                <ng-template #aliveNin>
+                    <span
+                        class="inline-flex items-center justify-center mt-2 px-2 py-0.5 text-xs font-medium rounded bg-indigo-500 text-white">Friendly</span>
+                </ng-template>
+                <ng-template #deadNin> </ng-template>
+
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider inset style="margin-top: 6px;"></mat-divider>
+        <mat-card-actions align="start" style="margin-bottom: 0px;">
+            <button mat-raised-button color="primary" style="margin-left: 10px"
+                [routerLink]="['/wiki/villages', village.id]" routerLinkActive="router-link-active">🥷 Enter</button>
+        </mat-card-actions>
+        <mat-card-footer>
+            <mat-progress-bar value="100" color="dark"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>
