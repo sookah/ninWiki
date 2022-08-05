@@ -38,7 +38,7 @@ $ npm run start:prod
 
 You will require Docker to be installed first [here.](https://docs.docker.com/get-docker/)
 
-In the `/api` folder run `docker compose up api -d`
+In the root folder run `docker compose up api -d`
 
 Please make sure you can connect to the docker engine or you can see the error below.
 
@@ -52,10 +52,38 @@ This will setup the database and run the api server.
 
 There are issues in the compose in different chip archtechures (macos M1 for example). So we have to do following to seed the data instead:
 
+### In the docker container cli 
+
+typically this command has to be run in the docker container.
+
+``` bash
+# check your container image id with
+docker ps
+
+CONTAINER ID   IMAGE      COMMAND                  CREATED      STATUS          PORTS                    NAMES
+07a1244036d3   blog_api   "docker-entrypoint.s…"   4 days ago   Up 43 seconds   0.0.0.0:3000->3000/tcp   api
+6d5d316a6d17   postgres   "docker-entrypoint.s…"   4 days ago   Up 18 minutes   0.0.0.0:5432->5432/tcp   api_db
+```
+
+Grab the api Image container id (07a1244036d3) and execute command below to get into the shell
+
+```
+docker exec -it <mycontainer> bash
+```
+
 ```bash
 # in the /api folder
-npx prisma generate
-
 npx prisma db push
+
+npx prisma db seed
 ```
+
+visit localhost:3000/villages to see the seeded villages data.
+
+
+
+
+
+
+
 
