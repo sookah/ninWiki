@@ -48,5 +48,14 @@ Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docke
 
 This will setup the database and run the api server.
 
-## Seeding Mock data 
+## Seeding Mock data
+
+There are issues in the compose in different chip archtechures (macos M1 for example). So we have to do following to seed the data instead:
+
+```bash
+# in the /api folder
+npx prisma generate
+
+npx prisma db push
+```
 

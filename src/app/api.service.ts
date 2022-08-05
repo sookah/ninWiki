@@ -23,21 +23,21 @@ export class ApiService {
     this.HOST_URL = this.isLocal ? this.LOCAL_API_URL : this.REMOTE_API_URL;
   }
   getVillages(): Observable<Village[]> {
-    return this.http.get<Village[]>('http://localhost:3000/villages').pipe(
+    return this.http.get<Village[]>(`${this.HOST_URL}/villages`).pipe(
       // retry(2),
       catchError(this.handleError)
     );
   }
 
   getVillage(id: number): Observable<Village> {
-    return this.http.get<Village>(`${this.HOST_URL} / villages / ${id}`).pipe(
+    return this.http.get<Village>(`${this.HOST_URL}/villages/${id}`).pipe(
       // retry(2),
       catchError(this.handleError)
     );
   }
 
   getVillageNinjas(village: Village) {
-    return this.http.get<Ninja[]>(`${this.HOST_URL} / villages / ${village.id} / ninjas`);
+    return this.http.get<Ninja[]>(`${this.HOST_URL}/villages/${village.id}/ninjas`);
   }
 
   getTextFile(filename: string) {
@@ -69,26 +69,3 @@ export class ApiService {
     return throwError(() => new Error('Something unknown happened, we try again.'));
   }
 }
-
-
-// get get fix fix fix get create create add require express require cors run loglevel debug app app app app api app api api api file file file secure false
-
-// const app express const cors require const express require dev server dev server proxyconfig src proxy.conf.json target
-
-// http localhost 3000 target http localhost 3000
-
-// angular cli 
-
-// Proxy CORS in Angular
-
-// When you're developing frameworks, there are some handy tricks that can be used to bypass CORS. Proxy servers, Angular app
-
-// Trying to access an https resource that has an invalid certificate will cause this error.
-
-// Trying to access an http resource from a page with an https origin will also cause this error.
-
-// The server did not respond to the actual request (even if it responded to the Preflight request). One scenario might be an HTTP service being developed that panicked without returning any data.
-
-// How to prevent CORS-based attacks
-
-// As a way to bypass CORS also introduces security issues and provides the potential for cross-domain attacks, if a website's CORS policy is poorly configured and implemented. CORS is not a protection against cross-origin attacks such as cross-site request forgery (CSRF). For this more server side server configuration can be implemented.
